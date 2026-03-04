@@ -39,17 +39,19 @@ export const PostDetails: React.FC<Props> = ({ post }) => {
       });
 
       dispatch(add(newComment));
-
-      await commentsApi.createComment(newComment);
-    } catch (error) {
+    } catch {
       dispatch(setError(true));
     }
   };
 
   const deleteComment = async (commentId: number) => {
-    dispatch(remove(commentId));
+    try {
+      await commentsApi.deleteComment(commentId);
 
-    await commentsApi.deleteComment(commentId);
+      dispatch(remove(commentId));
+    } catch {
+      setError(true);
+    }
   };
 
   return (
