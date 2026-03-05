@@ -50,7 +50,7 @@ export const PostDetails: React.FC<Props> = ({ post }) => {
 
       dispatch(remove(commentId));
     } catch {
-      setError(true);
+      dispatch(setError(true));
     }
   };
 
